@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@discordjs/rest": "^1.3.0",
+    "@discordjs/voice": "^0.13.0",
+    "@grpc/grpc-js": "^1.7.3",
+    "@improbable-eng/grpc-web": "^0.15.0",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.37.14",
+    "discord.js": "^14.6.1-dev.1666613093-68d5712.0",
+    "dotenv": "^16.0.3",
+    "google-protobuf": "^3.21.2",
+    "libsodium-wrappers": "^0.7.10",
+    "nodemon": "^2.0.20",
+    "pretty": "^2.0.0"
+  },
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "main": "src/bot.js",
+  "scripts": {
+    "test": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
