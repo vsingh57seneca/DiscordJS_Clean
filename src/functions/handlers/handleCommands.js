@@ -3,6 +3,8 @@ const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
 const chalk = require('chalk');
 
+const { DISCORD_TOKEN, DISCORD_CLIENT_ID, TEST_SERVER, CORD_SERVER } = process.env;
+
 module.exports = (client) => {
     client.handleCommands = async() => {
         const commandFolders = fs.readdirSync('./src/commands');
@@ -20,19 +22,24 @@ module.exports = (client) => {
         }
     }
 
-    const clientId = `${process.env.clientId}`;
 
-    const rest = new REST({ version: 9 }).setToken(process.env.token);
+    const rest = new REST({ version: 9 }).setToken(DISCORD_TOKEN);
     try {
 
         console.log("\nStarted refreshing applications (/) commands.");
 
-        const test_server = process.env.test_server;
-
-            await rest.put(Routes.applicationGuildCommands(clientId, test_server), {
+            await rest.put(Routes.applicationGuildCommands(DISCORD_CLIENT_ID, TEST_SERVER), {
                 body: client.commandArray,
             }).then(() => {
-                console.log(chalk.green(`Successfully reloaded application (/) commands on ${test_server}.`));
+                console.log(chalk.green(`Successfully reloaded application (/) commands on ${TEST_SERVER}.`));
+            }).catch((error) => {
+                console.log(error)
+            });
+
+            await rest.put(Routes.applicationGuildCommands(DISCORD_CLIENT_ID, CORD_SERVER), {
+                body: client.commandArray,
+            }).then(() => {
+                console.log(chalk.green(`Successfully reloaded application (/) commands on ${CORD_SERVER}.`));
             }).catch((error) => {
                 console.log(error)
             });
